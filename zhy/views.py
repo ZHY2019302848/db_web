@@ -116,11 +116,16 @@ def add(request):
         student_sdept = request.POST.get('student_sdept', '')
         conn = MySQLdb.connect(host="localhost", user="root", passwd="Zhy000815", db="carol", charset='utf8')
         with conn.cursor(cursorclass=MySQLdb.cursors.DictCursor) as cursor:
-            cursor.execute(
+            cursor.execute("select * from zhy_student,zhy_c where student_no = %s ", [student_no])
+            inquiry = cursor.fetchone()
+            if inquiry == None:
+             cursor.execute(
                 "INSERT INTO zhy_student (student_no,student_name,student_age,student_birth,student_gender,student_sdept) "
                 "values (%s,%s,%s,%s,%s,%s)",
                 [student_no, student_name, student_age, student_birth, student_gender, student_sdept])
-            conn.commit()
+             conn.commit()
+            else:
+              messages.error(request, '该学号相关信息已存在不可再次添加')
         return redirect('../index')
 
 
@@ -148,10 +153,12 @@ def edit(request):
 
         conn = MySQLdb.connect(host="localhost", user="root", passwd="Zhy000815", db="carol", charset='utf8')
         with conn.cursor(cursorclass=MySQLdb.cursors.DictCursor) as cursor:
+
             cursor.execute(
                 "UPDATE zhy_student set student_name=%s,student_age=%s,student_birth=%s,student_gender=%s,student_sdept=%s where student_no =%s",
                 [student_name, student_age, student_birth, student_gender, student_sdept, student_no])
             conn.commit()
+
         return redirect('../index')
 
 
@@ -202,11 +209,17 @@ def add_c(request):
         credit = request.POST.get('credit', '')
         conn = MySQLdb.connect(host="localhost", user="root", passwd="Zhy000815", db="carol", charset='utf8')
         with conn.cursor(cursorclass=MySQLdb.cursors.DictCursor) as cursor:
-            cursor.execute(
+            cursor.execute("select * from zhy_c where cno = %s ", [cno])
+            inquiry = cursor.fetchone()
+            if inquiry == None:
+             cursor.execute(
                 "INSERT INTO zhy_c (cno,cname,credit) "
                 "values (%s,%s,%s)",
                 [cno, cname, credit])
-            conn.commit()
+             conn.commit()
+            else:
+             messages.error(request, '该课程号相关信息已存在不可再次添加')
+
         return redirect('../index_c')
 
 
@@ -386,18 +399,7 @@ def chart(request):
         cursor.execute(sql6)
         cursor.execute(sql2)
         data_0 = cursor.fetchone()
-        '''
-        print("data_90:\n")
-        print(data_90['@sum'])
-        print("data_80:\n")
-        print(data_80['@sum'])
-        print("data_70:\n")
-        print(data_70['@sum'])
-        print("data_60:\n")
-        print(data_60['@sum'])
-        print("data_0:\n")
-        print(data_0['@sum'])
-        '''
+
         return render(request, 'student/chart.html',{'chs': chs , 'data_90':json.dumps(data_90),'data_80':json.dumps(data_80),
                                                      'data_70':json.dumps(data_70),'data_60':json.dumps(data_60),
                                                       'data_0':json.dumps(data_0)})
