@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>学生列表</title>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="{% static 'web_login.ico' %}">
+     <link rel="stylesheet" href="https://apps.bdimg.com/libs/bootstrap/3.2.0/css/bootstrap.min.css">
+
+
+         <link rel="stylesheet" href="https://apps.bdimg.com/libs/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="https://cdn.bootcss.com/moment.js/2.22.0/moment-with-locales.js"></script>
+		<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+		<title></title>
+		<style type="text/css">
+			.myrow {
+				display: flex;
+				flex-direction: row;
+			}
+		</style>
+    <style type="text/css">
+
+body {background-color:cornsilk}
+p {color:black}
+</style>
+
+</head>
+<body style="background-image:url({% static 'student.jfif' %});background-repeat:no-repeat;background-attachment:fixed">
+    {% if messages %}
+        <script>
+            {% for msg in messages %}
+                alert('{{ msg.message }}');
+            {% endfor %}
+        </script>
+    {% endif %}
+<div id = "login">
+<form action="../index_c" style="margin: 10px 0">
+    <input name="cname" placeholder="请输入课程名" value="{{ cname }}" style="margin-right: 10px"/>
+    <input name="cno" placeholder="请输入课程号" value="{{ cno }}" style="margin-right: 10px"/>
+    <br/>
+    <button type="submit" class="btn btn-success pull-left">查询</button>
+    <br/>
+</form>
+</div>
+<!--<table border="1px" width="100%" style="border-collapse: collapse;">-->
+<table class="table table-hover">
+    <caption>课程情况一览</caption>
+    <br>
+    <a href="../add_c">添加课程</a>
+     <thead>
+    <tr>
+        <th>课程号</th>
+        <th>课程名</th>
+        <th>学分</th>
+        <th>相关操作</th>
+    </tr>
+    </thead>
+    {% for course in courses %}
+        <today>
+        <tr>
+            <td >{{ course.cno }} </td>
+            <td>{{ course.cname }} </td>
+            <td>{{ course.credit}} </td>
+            <td>
+
+
+                <a href="../edit_c/?id={{ course.id }}"><button type="button" class="btn btn-default btn-xm" data-toggle="modal" data-target="#myModal">
+                                    <span class="glyphicon glyphicon-pencil"></span> 修改
+                </button></a>
+                 <a href="../delete_c/?id={{ course.id }}"><button type="button" class="btn btn-default btn-xm">
+                                    <span class="glyphicon glyphicon-trash"></span> 删除
+                 </button></a>
+                    <!-- 模态框（Modal） -->
+
+
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+		                  <div class="modal-content">
+			                   <div class="modal-header">
+				                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					                        &times;
+				                   </button>
+				                  <h4 class="modal-title" id="myModalLabel">
+					                   修改课程信息
+				                  </h4>
+			                   </div>
+			                  <div class="modal-body">
+
+			                  </div>
+                              <form method="post" action="../edit_c/" class="form-horizontal" role="form">
+                              {% csrf_token %}
+                    <input type="hidden" name="id" value="{{ course.id }}"/>
+                    <!-- 姓名部分-->
+                    <div class="form-group">
+                             <label for="firstname" class="col-sm-2 control-label">课程号</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="student_name" name="cno"
+                                           placeholder="请输入课程号" value="{{ course.cno }}">
+                                </div>
+
+                    </div>
+                                  <!-- 年龄部分-->
+                    <div class="form-group">
+                            <label for="firstname" class="col-sm-2 control-label">课程名</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="student_age" name="cname"
+                                           placeholder="请输入课程名" value="{{ course.cname }}">
+                                </div>
+                            <!--<input class="form-control required" type="text" placeholder="年龄" id="student_age" name="student_age" maxlength="20" value="{{ student.student_age }}"/>-->
+                    </div>
+                                  <div class="form-group">
+                            <label for="firstname" class="col-sm-2 control-label">学分</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="student_age" name="credit"
+                                           placeholder="请输入学分" value="{{ course.credit }}">
+                                </div>
+                            <!--<input class="form-control required" type="text" placeholder="年龄" id="student_age" name="student_age" maxlength="20" value="{{ student.student_age }}"/>-->
+                    </div>
+
+
+                                  <div class="modal-footer">
+				              <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				              </button>
+				              <button type="submit" class="btn btn-primary" name = "submit">
+					                     提交更改
+				              </button>
+                                                                    </div>
+
+</form>
+
+
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+            </td>
+        </tr>
+        </today>
+    {% endfor %}
+</table>
+</body>
+</html>

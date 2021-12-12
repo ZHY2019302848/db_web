@@ -1,0 +1,177 @@
+* {
+    margin:0;
+    padding: 0;
+}
+
+.w {
+    width: 1200px;
+    margin: auto;
+}
+
+
+body {
+    background-color: #fff;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+video {  
+    position: fixed;  
+    right: 0px;  
+    bottom: 0px;  
+    min-width: 100%;  
+    min-height: 100%;  
+    height: auto;  
+    width: auto;
+ 
+    /*加滤镜*/
+    /*filter: blur(15px); //背景模糊设置 */
+    /*-webkit-filter: grayscale(100%);*/  
+    /*filter:grayscale(100%); //背景灰度设置*/  
+    z-index:-11
+    
+}  
+
+source{  
+    min-width: 100%;  
+    min-height: 100%;  
+    height: auto;  
+    width: auto;  
+}
+
+body .header {
+    background-color: #eee;
+}
+
+
+
+.clearfix:before,.clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom:1;
+} 
+
+.header {
+    height: 50px;
+    background-color: #fff;
+}
+  
+  
+.logo {
+    text-align: center;
+    padding-top: 5px;
+}
+
+/*main模块*/
+
+.thingTable {
+    float: left;
+    margin-left: 350px;
+    margin-top: 90px;
+}
+.thingList table {
+    width:100%;
+    margin:15px 0;
+    border:0;
+}
+.thingList th {
+    background-color:#2f973e;
+    color:#FFFFFF
+}
+.thingList,.thingList th,.thingList td {
+    font-size:0.95em;
+    text-align:center;
+    padding:4px;
+    border-collapse:collapse;
+}
+.thingList th,.thingList td {
+    width: 315px;
+    border: 1px solid #2f973e;
+    border-width:1px 0 1px 0;
+    border:2px inset #ffffff;
+}
+.thingList tr {
+    border: 1px solid #ffffff;
+}
+.thingList tr:nth-child(odd){
+    background-color:#a9e7a1;
+}
+.thingList tr:nth-child(even){
+    background-color:#ffffff;
+}
+
+.fenYe {
+    float: left;
+    margin-left: 900px;
+    margin-top: 50px;
+    background-color: #2f973e;
+    box-shadow :rgba(0,0,0,.6) 0 1px 5px 0px;
+}
+.fenYe a{
+    color: #fff;
+    margin:5px 10px;
+}
+/*footer模块*/
+.footer {
+    margin-top: 850px;
+    height: 200px;
+    background-color: #eee;
+}
+
+.footer .w {
+    padding-top: 35px;
+}
+
+.copyright {
+    float: left;
+}
+
+.copyright p {
+    font-size: 12px;
+    color: #666666;
+    margin: 20px 0px 15px 0px;
+}
+
+.copyright .app {
+    display: block;
+    width: 120px;
+    height: 36px;
+    border: 1px solid #2f973e;
+    text-align: center;
+    line-height: 36px;
+    color: #2f973e;
+    font-size: 16px;
+}
+
+.links {
+    float: right;
+}
+
+.links dl {
+    float: left;
+    margin-left: 100px;
+}
+.links dl dt {
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 5px;
+}
+
+.links dl dd a {
+    font-size: 12px;
+    color: #333333;
+}
+  

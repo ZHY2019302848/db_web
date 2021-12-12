@@ -1,0 +1,14 @@
+.form{background: rgba(255,235,205,0.2);width:400px;margin:120px auto;}
+
+/*阴影*/
+.fa{display: inline-block;top: 27px;left: 6px;position: relative;color:#d4edda;}
+input[type="text"],input[type="password"]{padding-left:26px;}
+.checkbox{padding-left:21px;}
+
+#login_words{
+    font-family: KaiTi;
+    color:mediumaquamarine;
+    background: rgba(0,179,255,0.2) ;
+    width : 400px;
+    margin: auto;
+}

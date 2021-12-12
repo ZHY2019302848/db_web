@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选课信息编辑</title>
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <script src="Content/jquery-1.9.1.min.js"></script>
+<script src="Content/bootstrap/js/bootstrap.min.js"></script>
+<script src="Content/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script src="Content/bootstrap-select/js/i18n/defaults-zh_CN.min.js"></script>
+    <style>
+        form {
+            margin: 20px auto;
+            width: 500px;
+            border: 1px solid #ccc;
+            padding: 20px
+        }
+    </style>
+</head>
+
+<form method="post" action="../edit_sc/"  class="form-horizontal" role="form">
+    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{ sc.id }}"/>
+                      <div class="form-group">
+                             <label for="firstname" class="col-sm-2 control-label">学号</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="student_name" name="student_no"
+                                          value="{{ sc.student_no }}"  >
+                                </div>
+
+                    </div>
+                                  <!-- 年龄部分-->
+                    <div class="form-group">
+                            <label for="firstname" class="col-sm-2 control-label">课程号</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="student_age" name="cno"
+                                        value="{{ sc.cno }}"    >
+                                </div>
+
+                    </div>
+                                  <div class="form-group">
+                            <label for="firstname" class="col-sm-2 control-label">成绩</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="student_age" name="mark"
+                                         value="{{ sc.mark }}"   >
+                                </div>
+
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-info" name="submit">修改</button>
+                    </div>
+
+
+</form>
+</body>
+</html>

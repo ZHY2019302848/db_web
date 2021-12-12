@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static  'css/Login.css' %}">
+    <link rel="shortcut icon" href="{% static 'web_login.ico' %}">
+
+    <title>用户登录</title>
+</head>
+
+<body>
+    <section>
+        <!-- 背景颜色 -->
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="box">
+            <!-- 背景圆 -->
+            <div class="circle" style="--x:0"></div>
+            <div class="circle" style="--x:1"></div>
+            <div class="circle" style="--x:2"></div>
+            <div class="circle" style="--x:3"></div>
+            <div class="circle" style="--x:4"></div>
+            <!-- 登录框 -->
+            <div class="container">
+                <div class="form">
+                    <h2>登录</h2>
+                    <form action="../do_login/" method="post" >
+                        {% csrf_token %}
+                        <div class="inputBox">
+
+                            <input  type="text" placeholder="用户名" id="username" name="username"   value="{{ username }}"/>
+
+                        </div>
+                        <div class="inputBox">
+                            <input type="password" placeholder="密码" id = "password" name = "password"  value="{{ password }}"/>
+                        </div>
+                        <div class="inputBox">
+                            <input type="submit" value="登录" name="submit">
+                        <p class="forget">没有账户?<a href="../register/">
+                                注册
+                            </a></p>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</body>
+
+</html>

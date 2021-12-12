@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生添加</title>
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="Content/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
+
+<script src="Content/jquery-1.9.1.min.js"></script>
+<script src="Content/bootstrap/js/bootstrap.min.js"></script>
+<script src="Content/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script src="Content/bootstrap-select/js/i18n/defaults-zh_CN.min.js"></script>
+
+
+        <link rel="stylesheet" href="https://apps.bdimg.com/libs/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="https://cdn.bootcss.com/moment.js/2.22.0/moment-with-locales.js"></script>
+		<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+		<title></title>
+		<style type="text/css">
+			.myrow {
+				display: flex;
+				flex-direction: row;
+			}
+		</style>
+    <style>
+        form {
+            margin: 20px auto;
+            width: 500px;
+            border: 1px solid #ccc;
+            padding: 20px
+        }
+    </style>
+</head>
+<body>
+<form method="post" action="../add/" class="form-horizontal" role="form">
+    {% csrf_token %}
+                    <div class="form-group">
+                             <label for="firstname" class="col-sm-2 control-label">学号</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="student_no" name="student_no"
+                                           placeholder="请输入学号" >
+                                </div>
+                            <!--<input class="form-control required" type="text" placeholder="名字" id="student_name" name="student_name" maxlength="20" value="{{ student.student_name }}" />-->
+                    </div>
+                    <div class="form-group">
+                             <label for="firstname" class="col-sm-2 control-label">姓名</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="student_name" name="student_name"
+                                           placeholder="请输入姓名" >
+                                </div>
+                            <!--<input class="form-control required" type="text" placeholder="名字" id="student_name" name="student_name" maxlength="20" value="{{ student.student_name }}" />-->
+                    </div>
+                    <div class="form-group">
+                            <label for="firstname" class="col-sm-2 control-label">年龄</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="student_age" name="student_age"
+                                           placeholder="请输入年龄">
+                                </div>
+                            <!--<input class="form-control required" type="text" placeholder="年龄" id="student_age" name="student_age" maxlength="20" value="{{ student.student_age }}"/>-->
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">性别</label>
+                                <div class="col-sm-9">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="student_gender" id="optionsRadios3" value="男" checked> 男
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="student_gender" id="optionsRadios4"  value="女"> 女
+                                    </label>
+                    </div>
+                    </div>
+                     <div class="form-group">
+                            <label class="col-sm-2 control-label">生日</label>
+                            <div class="col-sm-9">
+				                    <div class='input-group date' style="width: 14em;" id='datetimepicker1'>
+					                         <input type='text' class="timeInput form-control" id="student_birth" name="student_birth" />
+					                                <span class="input-group-addon">
+						                               <span class="glyphicon glyphicon-calendar"></span>
+					                              </span>
+				                  </div>
+
+
+                    </div>
+                    </div>
+                    <script>
+			var myDate = new Date();
+			var year = myDate.getFullYear();
+			let date = new Date();
+			var month = date.getMonth() + 1;
+			var months = year + '-' + month;
+			$(function() {
+				$('#form1').hide();
+				var picker1 = $('#datetimepicker1').datetimepicker({
+					format: 'YYYY-MM',
+					locale: moment.locale('zh-cn'),
+				});
+
+			});
+			$('#datetimepicker1').datetimepicker({
+				format: 'YYYY-MM',
+				locale: moment.locale('zh-cn'),
+				defaultDate: months
+			});
+		    </script>
+                        <div class="form-group">
+                                <label for="city" class="col-sm-2 control-label">学院</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name = "student_sdept">
+                                        <option>CS</option>
+                                        <option>IS</option>
+                                        <option>SS</option>
+                                    </select>
+
+                                </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-info" name="submit">添加</button>
+                    </div>
+
+
+
+</form>
+
+</body>
+</html>

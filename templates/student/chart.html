@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8"><link rel="icon" href="https://jscdn.com.cn/highcharts/images/favicon.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            /* css 代码  */
+        </style>
+        <script src="https://cdn.highcharts.com.cn/highcharts/highcharts.js"></script>
+        <script src="https://cdn.highcharts.com.cn/highcharts/modules/exporting.js"></script>
+        <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+
+         <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+     <link rel="stylesheet" href="https://apps.bdimg.com/libs/bootstrap/3.2.0/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div id="container" style="min-width:400px;height:400px"></div>
+        <script>
+
+
+            // JS 代码
+            // Build the chart
+Highcharts.chart('container', {
+		chart: {
+				plotBackgroundColor: null,
+				plotBorderWidth: null,
+				plotShadow: false,
+				type: 'pie'
+		},
+		title: {
+				text: '梁山泊平均学分积分布'
+		},
+		tooltip: {
+				pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		},
+		plotOptions: {
+				pie: {
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+								enabled: false
+						},
+						showInLegend: true
+				}
+		},
+		series: [{
+
+                var :dict_90 = {{ data_90|safe }},
+                var :dict_80 = {{ data_80|safe }},
+                var :dict_70 = {{ data_70|safe }},
+                var :dict_60 = {{ data_60|safe }},
+                var :dict_0 = {{ data_0|safe }},
+				name: 'Students',
+				colorByPoint: true,
+				data: [{
+						name: '90-100',
+						y: dict_90['@sum'],
+						//sliced: true,
+						//selected: true
+				}, {
+						name: '80-89',
+						y: dict_80['@sum']
+
+				}, {
+						name: '70-79',
+						y: dict_70['@sum']
+				}, {
+						name: '60-69',
+						y: dict_60['@sum']
+				}, {
+						name: '0-59',
+						y: dict_0['@sum']
+				}]//, {
+				  //		name: 'Other',
+				 //		y: 7.05
+				//}]
+		}]
+});
+        </script>
+
+
+        <table   class="table table-hover">
+    <caption>平均学分绩</caption>
+    <thead>
+    <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>平均学分绩</th>
+    </tr>
+    </thead>
+    {% for ch in chs %}
+        <today>
+        <tr>
+            <td >{{ ch.student_no }} </td>
+            <td>{{ ch.student_name }} </td>
+            <td>{{ ch.avgm}} </td>
+            <td>
+            </td>
+        </tr>
+        </today>
+    {% endfor %}
+</table>
+
+    </body>
+</html>

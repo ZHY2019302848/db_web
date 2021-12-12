@@ -1,0 +1,222 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>学生列表</title>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="{% static 'web_login.ico' %}">
+
+     <link rel="stylesheet" href="https://apps.bdimg.com/libs/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="https://cdn.bootcss.com/moment.js/2.22.0/moment-with-locales.js"></script>
+		<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static  'css/commonList.css' %}">
+		<title></title>
+		<style type="text/css">
+			.myrow {
+				display: flex;
+				flex-direction: row;
+			}
+		</style>
+    <style type="text/css">
+
+
+body {background-color:cornsilk}
+p {color:black}
+</style>
+
+</head>
+<body>
+    <video id="v1" autoplay loop muted>
+        <source src="{% static 'bgc-video.mp4' %}" type="video/mp4" muted="true" />
+    </video>
+<div id = "login">
+<form action="../index" style="margin: 10px 0">
+    <input name="student_name" placeholder="请输入姓名" value="{{ student_name }}" style="margin-right: 10px"/>
+    <input name="student_no" placeholder="请输入学号" value="{{ student_no }}" style="margin-right: 10px"/>
+    <input name="student_gender" placeholder="请输入性别" value="{{ student_gender }}" style="margin-right: 10px"/>
+    <br>
+    <button type="submit" class="btn btn-success pull-left">查询</button>
+    <br>
+
+</form>
+</div>
+<!--<table border="1px" width="100%" style="border-collapse: collapse;">-->
+<table class="thingList">
+    <caption color="red">学生情况一览</caption>
+    <br/>
+    <a href="../add"><button type="submit" class="btn btn-info btn-lg pull-middle">添加学生</button></a>
+    <br/>
+    {% if messages %}
+                                  <script>
+                                 {% for msg in messages %}
+                                alert('{{ msg.message }}');
+                                  {% endfor %}
+                               </script>
+                              {% endif %}
+
+     <thead>
+    <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>出生日期</th>
+        <th>性别</th>
+        <th>学院</th>
+        <th>相关操作</th>
+    </tr>
+    </thead>
+    {% for student in students %}
+        <today>
+        <tr>
+            <td >{{ student.student_no }} </td>
+            <td>{{ student.student_name }} </td>
+            <td>{{ student.student_age }} </td>
+            <td>{{ student.student_birth }} </td>
+            <td>{{ student.student_gender }} </td>
+            <td>{{ student.student_sdept }} </td>
+            <td>
+
+                <a href="../edit/?student_no={{ student.student_no }}"><button type="button" class="btn btn-default btn-xm" data-toggle="modal" data-target="#myModal">
+                                    <span class="glyphicon glyphicon-pencil"></span> 修改
+                </button></a>
+                 <a href="../delete/?student_no={{ student.student_no }}"><button type="button" class="btn btn-default btn-xm">
+                                    <span class="glyphicon glyphicon-trash"></span> 删除
+                 </button></a>
+                    <!-- 模态框（Modal） -->
+                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+		                  <div class="modal-content">
+			                   <div class="modal-header">
+				                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					                        &times;
+				                   </button>
+				                  <h4 class="modal-title" id="myModalLabel">
+					                   修改学生信息
+				                  </h4>
+			                   </div>
+			                  <div class="modal-body">
+
+			                  </div>
+
+                              <form method="post" action="../edit/" class="form-horizontal" role="form">
+                              {% csrf_token %}
+                    <input type="hidden" name="student_no" value="{{ student.student_no }}"/>
+                    <!-- 姓名部分-->
+                    <div class="form-group">
+                             <label for="firstname" class="col-sm-2 control-label">姓名</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="student_name" name="student_name"
+                                           placeholder="请输入姓名" value="{{ student.student_name }}">
+                                </div>
+                            <!--<input class="form-control required" type="text" placeholder="名字" id="student_name" name="student_name" maxlength="20" value="{{ student.student_name }}" />-->
+                    </div>
+                                  <!-- 年龄部分-->
+                    <div class="form-group">
+                            <label for="firstname" class="col-sm-2 control-label">年龄</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="student_age" name="student_age"
+                                           placeholder="请输入年龄" value="{{ student.student_age }}">
+                                </div>
+                            <!--<input class="form-control required" type="text" placeholder="年龄" id="student_age" name="student_age" maxlength="20" value="{{ student.student_age }}"/>-->
+                    </div>
+                                  <!-- 出生部分-->
+                    <div class="form-group">
+                            <label class="col-sm-2 control-label">出生年月</label>
+                            <div class="col-sm-9">
+				                    <div class='input-group date' style="width: 14em;" id='datetimepicker1'>
+					                         <input type='text' class="timeInput form-control" id="student_birth" name="student_birth" />
+					                                <span class="input-group-addon">
+						                               <span class="glyphicon glyphicon-calendar"></span>
+					                              </span>
+				                  </div>
+
+                            <!--<input class="form-control required" type="text" placeholder="出生年月日" id="student_birth" name="student_birth" maxlength="20" />-->
+                    </div>
+                    </div>
+                                  <script>
+			var myDate = new Date();
+			var year = myDate.getFullYear();
+			let date = new Date();
+			var month = date.getMonth() + 1;
+			var months = year + '-' + month;
+			$(function() {
+				$('#form1').hide();
+				var picker1 = $('#datetimepicker1').datetimepicker({
+					format: 'YYYY-MM',
+					locale: moment.locale('zh-cn'),
+				});
+
+			});
+			$('#datetimepicker1').datetimepicker({
+				format: 'YYYY-MM',
+				locale: moment.locale('zh-cn'),
+				defaultDate: months
+			});
+		</script>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">性别</label>
+                                <div class="col-sm-9">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="student_gender" id="optionsRadios3" value="男" checked> 男
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="student_gender" id="optionsRadios4"  value="女"> 女
+                                    </label>
+                        <!--<input class="form-control required" type="text" placeholder="性别" id="student_gender" name="student_gender" maxlength="20" />!-->
+                    </div>
+                    </div>
+                        <!-- 学院部分-->
+                    <div class="form-group">
+                         <label for="city" class="col-sm-2 control-label">所在学院</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name = "student_sdept">
+                                        <option>CS</option>
+                                        <option>IS</option>
+                                        <option>SS</option>
+                                    </select>
+
+                                </div>
+
+                    </div>
+
+                                  <div class="modal-footer">
+				              <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				              </button>
+				              <button type="submit" class="btn btn-primary" name = "submit">
+					                     提交更改
+				              </button>
+                                                                    </div>
+
+</form>
+
+
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
+
+
+               <!--<a href="../edit/?student_no={{ student.student_no }}">
+                    修改学生信息⠀⠀
+                </a>
+                <a href="../delete/?student_no={{ student.student_no }}">
+                    删除学生信息⠀⠀
+                </a>-->
+            </td>
+        </tr>
+        </today>
+    {% endfor %}
+</table>
+</body>
+</html>
